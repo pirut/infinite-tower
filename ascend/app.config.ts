@@ -12,9 +12,9 @@ export default ({ config }: { config: ExpoConfig }) => ({
   orientation: 'portrait',
   updates: { enabled: true },
   assetBundlePatterns: ['**/*'],
-  ios: { supportsTablet: true },
+  ios: { supportsTablet: true, bundleIdentifier: 'com.anonymous.ascend' },
   android: {},
-  web: { bundler: 'metro', output: 'static' },
+  web: { bundler: 'metro' },
   extra: {
     SUPABASE_URL,
     SUPABASE_ANON_KEY,

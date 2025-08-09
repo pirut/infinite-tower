@@ -1,13 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 
 export type Vector = { x: number; y: number };
-export type Entity = { id: string; pos: Vector; hp: number; kind: 'player' | 'enemy' | 'projectile' };
-export type Particle = { id: string; pos: Vector; vel: Vector; life: number; color: string; r: number };
+export type Entity = {
+  id: string;
+  pos: Vector;
+  hp: number;
+  kind: 'player' | 'enemy' | 'projectile';
+};
+export type Particle = {
+  id: string;
+  pos: Vector;
+  vel: Vector;
+  life: number;
+  color: string;
+  r: number;
+};
 export type EngineState = {
   player: Entity;
   enemies: Entity[];
   projectiles: Entity[];
   particles: Particle[];
+  screenShake?: number;
 };
 
 function distance(a: Vector, b: Vector): number {
@@ -16,8 +29,8 @@ function distance(a: Vector, b: Vector): number {
   return Math.hypot(dx, dy);
 }
 
-export function useEngine(initial: Omit<EngineState, 'particles'>) {
-  const [state, setState] = useState<EngineState>({ ...initial, particles: [] });
+export function useEngine(initial: Omit<EngineState, 'particles' | 'screenShake'>) {
+  const [state, setState] = useState<EngineState>({ ...initial, particles: [], screenShake: 0 });
   const raf = useRef<number | null>(null);
   const lastTs = useRef<number>(0);
   const pausedRef = useRef<boolean>(false);
@@ -100,7 +113,10 @@ export function useEngine(initial: Omit<EngineState, 'particles'>) {
           }))
           .filter((pt) => pt.life > 0);
 
-        return { ...s, enemies: newEnemies, projectiles, particles };
+        const shakeDecay = Math.max(0, (s.screenShake ?? 0) - dt * 2);
+        const screenShake = shakeDecay + (hitPositions.length > 0 ? 0.25 : 0);
+
+        return { ...s, enemies: newEnemies, projectiles, particles, screenShake };
       });
 
       raf.current = requestAnimationFrame(step);

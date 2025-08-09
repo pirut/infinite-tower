@@ -11,5 +11,5 @@ export default function EventsScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  text: { fontSize: 22 },
+  text: { fontSize: 22, color: '#e5e7eb' },
 });
