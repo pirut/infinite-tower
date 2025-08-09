@@ -109,3 +109,17 @@ create policy if not exists "Pets own" on public.pets for all using (auth.uid() 
 
 create policy if not exists "Event leaderboard read" on public.event_leaderboard for select using (true);
 create policy if not exists "Event leaderboard own" on public.event_leaderboard for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+-- RPC: increment profile balances safely
+create or replace function public.increment_profile_balances(
+  p_user_id uuid,
+  p_coins int,
+  p_keys int
+) returns void as $$
+begin
+  update public.profiles
+  set coins = coalesce(coins, 0) + coalesce(p_coins, 0),
+      keys = coalesce(keys, 0) + coalesce(p_keys, 0)
+  where id = p_user_id;
+end;
+$$ language plpgsql security definer;

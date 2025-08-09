@@ -35,6 +35,9 @@ export function Scene({ width, height, state, onTouchMove }: Props) {
           {state.projectiles.map((pr) => (
             <Circle key={pr.id} cx={pr.pos.x} cy={pr.pos.y} r={4} color="#60a5fa" />
           ))}
+          {state.particles.map((pt) => (
+            <Circle key={pt.id} cx={pt.pos.x} cy={pt.pos.y} r={pt.r} color={pt.color} />
+          ))}
         </Group>
       </Canvas>
     </View>
