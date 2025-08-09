@@ -1,0 +1,13 @@
+{
+  "floor_time_target_s": 45,
+  "enemy_hp_curve": { "base": 20, "growth": 1.11 },
+  "dps_curve": { "base": 8, "growth": 1.07 },
+  "coin_drop": { "mean": 6, "var": 3 },
+  "key_drop_chance": 0.08,
+  "jackpot": { "rarity": 0.005, "pity_every": 60 },
+  "upgrade_cost_base": 50,
+  "upgrade_cost_growth": 1.18,
+  "skill_respec_gems": 50,
+  "pet_xp_per_min": 2,
+  "pet_bond_daily": 3
+}

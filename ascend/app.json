@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Ascend",
+    "slug": "ascend",
+    "scheme": "ascend",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0b0e14"
+    },
+    "updates": {
+      "enabled": true
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0b0e14"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    }
+  }
+}
