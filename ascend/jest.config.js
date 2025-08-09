@@ -10,5 +10,16 @@ module.exports = {
   moduleNameMapper: {
     '\\.(png|jpg|jpeg|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js',
     '^expo-constants$': '<rootDir>/__mocks__/expo-constants.js'
-  }
+  },
+  collectCoverage: true,
+  collectCoverageFrom: ['src/shared/**/*.ts'],
+  coverageReporters: ['text', 'lcov'],
+  coverageThreshold: {
+    global: {
+      statements: 85,
+      branches: 80,
+      functions: 85,
+      lines: 85,
+    },
+  },
 };

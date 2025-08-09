@@ -1,4 +1,4 @@
-import { applyLoot, nextUpgradeCost, spendCoins } from '../meta';
+import { applyLoot, nextUpgradeCost, spendCoins, canAfford } from '../meta';
 
 it('calculates next upgrade cost', () => {
   expect(nextUpgradeCost(50, 1.18, 0)).toBe(50);
@@ -11,4 +11,10 @@ it('applies loot and spends coins', () => {
   expect(c.keys).toBe(1);
   const after = spendCoins(c, 5);
   expect(after.coins).toBe(5);
+});
+
+it('cannot spend when cannot afford', () => {
+  const c = { coins: 2, gems: 0, keys: 0 };
+  expect(canAfford(c, 3)).toBe(false);
+  expect(() => spendCoins(c, 3)).toThrow('Insufficient coins');
 });
